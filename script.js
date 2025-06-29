@@ -1,16 +1,30 @@
+
 document.getElementById('routineForm').addEventListener('submit', function(e) {
   e.preventDefault();
-  const resultDiv = document.getElementById('result');
-  resultDiv.innerHTML = "<p>AI가 당신만의 루틴을 생성 중입니다... 🧠💪</p>";
+  const age = parseInt(document.getElementById('age').value);
+  const weight = parseInt(document.getElementById('weight').value);
+  const goal = document.getElementById('goal').value;
 
-  setTimeout(() => {
-    resultDiv.innerHTML = `
-      <h3>🎯 오늘의 루틴</h3>
-      <ul>
-        <li>아침: 계란 2개 + 닭가슴살 샐러드</li>
-        <li>운동: 스쿼트 3세트, 푸쉬업 3세트, 플랭크 1분</li>
-        <li>저녁: 단백질 쉐이크 + 고구마</li>
-      </ul>
-    `;
-  }, 1500);
+  let routine = "";
+
+  if (goal === "체중 감량") {
+    if (age < 20 || weight < 60) {
+      routine = "가벼운 유산소 + 샐러드 위주 식단";
+    } else {
+      routine = "중강도 인터벌 트레이닝 + 고단백 저탄수 식단";
+    }
+  } else if (goal === "근육 증가") {
+    if (weight < 70) {
+      routine = "기본 근력운동 3세트 + 단백질 보충 식단";
+    } else {
+      routine = "고강도 중량운동 + 크레아틴 & 단백질 식단";
+    }
+  } else {
+    routine = "가벼운 스트레칭 + 영양 밸런스 식단";
+  }
+
+  document.getElementById('result').innerHTML = `
+    <h3>🎯 맞춤 루틴</h3>
+    <p>${routine}</p>
+  `;
 });
